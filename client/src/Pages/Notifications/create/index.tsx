@@ -125,7 +125,10 @@ const NotificationsCreatePage = () => {
 			{/* Escalation configuration */}
 			<ConfigBox
 				title={t("pages.notifications.form.escalation.title") ?? "Escalation"}
-				subtitle={t("pages.notifications.form.escalation.description") ?? "Send escalation emails to additional addresses after delays."}
+				subtitle={
+					t("pages.notifications.form.escalation.description") ??
+					"Send escalation emails to additional addresses after delays."
+				}
 				rightContent={
 					<Stack spacing={2}>
 						<Controller
@@ -134,15 +137,27 @@ const NotificationsCreatePage = () => {
 							defaultValue={defaults.escalation?.enabled ?? false}
 							render={({ field }) => (
 								<FormControlLabel
-									control={<Switch checked={field.value} onChange={(e) => field.onChange(e.target.checked)} />}
-									label={t("pages.notifications.form.escalation.enable") ?? "Enable escalation"}
+									control={
+										<Switch
+											checked={field.value}
+											onChange={(e) => field.onChange(e.target.checked)}
+										/>
+									}
+									label={
+										t("pages.notifications.form.escalation.enable") ?? "Enable escalation"
+									}
 								/>
 							)}
 						/>
 						{watch("escalation.enabled") && (
 							<Stack spacing={1}>
 								{[0].map((i) => (
-									<Stack key={i} direction="row" spacing={2} alignItems="center">
+									<Stack
+										key={i}
+										direction="row"
+										spacing={2}
+										alignItems="center"
+									>
 										<Controller
 											name={`escalation.levels.${i}.address` as const}
 											control={control}
@@ -152,7 +167,9 @@ const NotificationsCreatePage = () => {
 													{...field}
 													type="text"
 													fieldLabel="Escalation address"
-													placeholder={t("pages.notifications.form.escalation.placeholderEmail")}
+													placeholder={t(
+														"pages.notifications.form.escalation.placeholderEmail"
+													)}
 													fullWidth
 													error={!!fieldState.error}
 													helperText={fieldState.error?.message ?? ""}
@@ -169,12 +186,16 @@ const NotificationsCreatePage = () => {
 													type="number"
 													fieldLabel="Escalation delay (min)"
 													placeholder="15"
-                                            inputProps={{ min: 0, step: 1 }}
-                                            value={field.value ?? ""}
-                                            onChange={(event) => field.onChange(event.target.value === "" ? "" : Number(event.target.value))}
+													inputProps={{ min: 0, step: 1 }}
+													value={field.value ?? ""}
+													onChange={(event) =>
+														field.onChange(
+															event.target.value === "" ? "" : Number(event.target.value)
+														)
+													}
 													error={!!fieldState.error}
 													helperText={fieldState.error?.message ?? ""}
-												style={{ width: 160 }}
+													style={{ width: 160 }}
 												/>
 											)}
 										/>
@@ -235,7 +256,7 @@ const NotificationsCreatePage = () => {
 								/>
 							)}
 						/>
-				}
+					}
 				/>
 			)}
 			{watchedType === "matrix" && (

@@ -85,7 +85,12 @@ export class EmailProvider implements INotificationProvider {
 			return true;
 		}
 
-		if (isMonitorDown && notification.escalation?.enabled && Array.isArray(notification.escalation.levels) && notification.escalation.levels.length > 0) {
+		if (
+			isMonitorDown &&
+			notification.escalation?.enabled &&
+			Array.isArray(notification.escalation.levels) &&
+			notification.escalation.levels.length > 0
+		) {
 			this.clearEscalationTimer(notification.id, message.monitor.id);
 			const [level] = notification.escalation.levels;
 			if (level.address) {
@@ -109,7 +114,11 @@ export class EmailProvider implements INotificationProvider {
 		}
 	}
 
-	private scheduleEscalation(notification: Notification, message: NotificationMessage, level: NonNullable<Notification["escalation"]>["levels"][0]): void {
+	private scheduleEscalation(
+		notification: Notification,
+		message: NotificationMessage,
+		level: NonNullable<Notification["escalation"]>["levels"][0]
+	): void {
 		const delayMs = (level.delayMinutes ?? 0) * 60_000;
 		const key = this.getEscalationKey(notification.id, message.monitor.id);
 

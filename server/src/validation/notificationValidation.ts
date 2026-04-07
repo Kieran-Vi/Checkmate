@@ -99,7 +99,7 @@ export const createNotificationBodyValidation = z.discriminatedUnion("type", [
 		type: z.literal("teams"),
 		address: z.url({ message: "Please enter a valid Webhook URL" }),
 		escalation: escalationSchema,
-}),
+	}),
 ]);
 
 export const testNotificationBodyValidation = createNotificationBodyValidation;

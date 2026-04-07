@@ -12,7 +12,9 @@ export const useNotificationForm = ({ data = null }: UseNotificationFormOptions 
 		const escalationWithOneLevel = data?.escalation
 			? {
 					enabled: data.escalation.enabled,
-					levels: data.escalation.levels ? [data.escalation.levels[0]] : [{ delayMinutes: 15, address: "" }],
+					levels: data.escalation.levels
+						? [data.escalation.levels[0]]
+						: [{ delayMinutes: 15, address: "" }],
 				}
 			: { enabled: false, levels: [{ delayMinutes: 15, address: "" }] };
 

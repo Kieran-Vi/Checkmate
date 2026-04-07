@@ -12,7 +12,10 @@ const baseSchema = z.object({
 				.array(
 					z.object({
 						delayMinutes: z.number().min(0, "Delay must be >= 0"),
-						address: z.string().min(1, "Escalation address is required").email("Please enter a valid email address"),
+						address: z
+							.string()
+							.min(1, "Escalation address is required")
+							.email("Please enter a valid email address"),
 					})
 				)
 				.max(1, "Only one escalation level is allowed")
